@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpForce = 250f;
+    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float groundedThreshold = 0.1f; // 플레이어 중심이 땅에서 얼마나 떨어져 있을 때 땅에 닿은 상태로 치는지 임계값
 
     [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
@@ -45,7 +45,7 @@ public class PlayerBehavior : MonoBehaviour
         if (horizontal != 0f)
             transform.position += Vector3.right * horizontal * moveSpeed * Time.fixedDeltaTime;
         if (isGrounded && Input.GetButton("Jump"))
-            rigidbody.AddForce(Vector2.up * jumpForce);
+            rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
     }
 
     private void CheckIsGrounded() // 플레이어가 땅에 닿아 있는 지 확인.
