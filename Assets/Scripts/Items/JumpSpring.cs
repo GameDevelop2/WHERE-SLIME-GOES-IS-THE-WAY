@@ -3,7 +3,7 @@ using UnityEngine;
 public class JumpSpring : MonoBehaviour
 {
     [SerializeField] private float jumpSpeed = 10f;
-    private static Rigidbody2D playerRigidbody;
+    private Rigidbody2D playerRigidbody;
 
     private void Awake()
     {
