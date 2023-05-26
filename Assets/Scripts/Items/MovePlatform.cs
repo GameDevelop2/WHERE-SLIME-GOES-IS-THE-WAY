@@ -1,0 +1,47 @@
+﻿using UnityEngine;
+
+public class MovePlatform : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private bool horizontalMove;
+    [SerializeField] private float switchDirectionThreshold = 0.1f;
+
+    private Vector3 moveDirection;
+    private Rigidbody2D rigidbody;
+
+    private LayerMask staticMapLayer; // MapStaticObject 레이어
+
+    void Awake()
+    {
+        staticMapLayer = LayerMask.NameToLayer("MapStaticObject");
+        staticMapLayer = 1 << staticMapLayer;
+
+        rigidbody = GetComponent<Rigidbody2D>();
+
+        if (horizontalMove)
+            moveDirection = Vector3.right;
+        else
+            moveDirection = Vector3.up;
+    }
+
+    void FixedUpdate()
+    {
+        Vector2 lineStart, lineEnd; // 이동 방향에 물체가 존재하는 지 확인하기 위한 라인 캐스트의 시작/끝 점
+        if (horizontalMove)
+        {
+            lineStart = transform.position + new Vector3((transform.lossyScale.x/2 + switchDirectionThreshold) * moveDirection.x, transform.lossyScale.y/2, 0f);
+            lineEnd = lineStart - new Vector2(0f, transform.lossyScale.y);
+        }
+        else
+        {
+            lineStart = transform.position + new Vector3(transform.lossyScale.x/2, (transform.lossyScale.y/2 + switchDirectionThreshold) * moveDirection.y, 0f);
+            lineEnd = lineStart - new Vector2(transform.lossyScale.x, 0f);
+        }
+
+        Debug.DrawLine(lineStart, lineEnd, Color.blue, 0.05f); // 라인캐스트 범위 디버깅 (Game창에서 Gizmos 활성화로 확인) 
+        if (Physics2D.Linecast(lineStart, lineEnd, staticMapLayer).collider) // 이동 방향에 MapStaticObject 레이어가 설정된 물체가 존재하는 경우 방향을 바꾼다.
+            moveDirection = -moveDirection;
+
+        transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
+    }
+}
