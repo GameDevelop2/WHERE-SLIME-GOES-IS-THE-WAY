@@ -793,6 +793,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HorizontalMovePlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 5862212778858640658, guid: cdc0095672d9f1243bca09622a7a17f8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7328211092019061196, guid: cdc0095672d9f1243bca09622a7a17f8, type: 3}
       propertyPath: m_RootOrder
       value: 3

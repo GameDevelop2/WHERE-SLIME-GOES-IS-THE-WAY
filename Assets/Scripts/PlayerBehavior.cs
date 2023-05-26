@@ -13,7 +13,8 @@ public class PlayerBehavior : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     private bool isGrounded; // 플레이어가 땅에 붙어있는가? true -> 붙어 있음.
-    private int groundLayerMask; // isGrounded 체크를 위해 땅에 레이캐스트 시 적용할 레이어 마스크
+    private int groundLayer; // isGrounded 체크를 위해 땅에 레이캐스트 시 적용할 레이어 마스크
+    private int kinematicMapLayer; // isGrounded 체크를 위해 땅에 레이캐스트 시 적용할 레이어 마스크
 
     private Vector3 playerSpawner; // 플레이어 부활 위치
 
@@ -21,7 +22,8 @@ public class PlayerBehavior : MonoBehaviour
     {
         currentItemIndex = 0;
         rigidbody = GetComponent<Rigidbody2D>();
-        groundLayerMask = ~(1 << LayerMask.NameToLayer("Player")); // 이 마스크 적용 시 Player 이외의 모든 레이어와 충돌.
+        groundLayer = ~(1 << LayerMask.NameToLayer("Player")); // 이 마스크 적용 시 Player 이외의 모든 레이어와 충돌.
+        kinematicMapLayer = LayerMask.NameToLayer("MapKinematicObject");
         playerSpawner = GameObject.FindGameObjectWithTag("Respawn").transform.position;
     }
 
@@ -49,7 +51,7 @@ public class PlayerBehavior : MonoBehaviour
     private void CheckIsGrounded() // 플레이어가 땅에 닿아 있는 지 확인. 중앙에서 쏘는 걸론 문제가 있으므로 이후 다른 방식으로 대체.
     {
         Debug.DrawRay(transform.position, Vector2.down * groundedThreshold, Color.red);
-        if (Physics2D.Raycast(transform.position, Vector2.down, groundedThreshold, groundLayerMask).collider)
+        if (Physics2D.Raycast(transform.position, Vector2.down, groundedThreshold, groundLayer).collider)
             isGrounded = true;
         else
             isGrounded = false;
@@ -67,5 +69,17 @@ public class PlayerBehavior : MonoBehaviour
     private void Respawn()
     {
         transform.position = playerSpawner;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == kinematicMapLayer)
+            transform.SetParent(collision.transform);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == kinematicMapLayer)
+            transform.SetParent(null);
     }
 }

@@ -9,12 +9,12 @@ public class MovePlatform : MonoBehaviour
     private Vector3 moveDirection;
     private Rigidbody2D rigidbody;
 
-    private LayerMask staticMapMask; // MapStaticObject 레이어
+    private LayerMask staticMapLayer; // MapStaticObject 레이어
 
     void Awake()
     {
-        staticMapMask = LayerMask.NameToLayer("MapStaticObject");
-        staticMapMask = 1 << staticMapMask;
+        staticMapLayer = LayerMask.NameToLayer("MapStaticObject");
+        staticMapLayer = 1 << staticMapLayer;
 
         rigidbody = GetComponent<Rigidbody2D>();
 
@@ -39,9 +39,9 @@ public class MovePlatform : MonoBehaviour
         }
 
         Debug.DrawLine(lineStart, lineEnd, Color.blue, 0.05f); // 라인캐스트 범위 디버깅 (Game창에서 Gizmos 활성화로 확인) 
-        if (Physics2D.Linecast(lineStart, lineEnd, staticMapMask).collider) // 이동 방향에 MapStaticObject 레이어가 설정된 물체가 존재하는 경우 방향을 바꾼다.
+        if (Physics2D.Linecast(lineStart, lineEnd, staticMapLayer).collider) // 이동 방향에 MapStaticObject 레이어가 설정된 물체가 존재하는 경우 방향을 바꾼다.
             moveDirection = -moveDirection;
 
-        rigidbody.MovePosition(transform.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+        transform.position += moveDirection * moveSpeed * Time.fixedDeltaTime;
     }
 }
