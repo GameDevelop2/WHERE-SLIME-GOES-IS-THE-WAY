@@ -690,7 +690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   jumpForce: 250
-  groundedThreshold: 0.27
+  groundedThreshold: 0.1
   itemList:
   - {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
 --- !u!1 &1894929611

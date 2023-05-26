@@ -29,13 +29,13 @@ public class MovePlatform : MonoBehaviour
         Vector2 lineStart, lineEnd; // 이동 방향에 물체가 존재하는 지 확인하기 위한 라인 캐스트의 시작/끝 점
         if (horizontalMove)
         {
-            lineStart = transform.position + new Vector3((transform.localScale.x/2 + switchDirectionThreshold) * moveDirection.x, transform.localScale.y/2, 0);
-            lineEnd = lineStart - new Vector2(0, transform.localScale.y);
+            lineStart = transform.position + new Vector3((transform.lossyScale.x/2 + switchDirectionThreshold) * moveDirection.x, transform.lossyScale.y/2, 0f);
+            lineEnd = lineStart - new Vector2(0f, transform.lossyScale.y);
         }
         else
         {
-            lineStart = transform.position + new Vector3(transform.localScale.x/2, (transform.localScale.y/2 + switchDirectionThreshold) * moveDirection.y, 0);
-            lineEnd = lineStart - new Vector2(transform.localScale.x, 0);
+            lineStart = transform.position + new Vector3(transform.lossyScale.x/2, (transform.lossyScale.y/2 + switchDirectionThreshold) * moveDirection.y, 0f);
+            lineEnd = lineStart - new Vector2(transform.lossyScale.x, 0f);
         }
 
         Debug.DrawLine(lineStart, lineEnd, Color.blue, 0.05f); // 라인캐스트 범위 디버깅 (Game창에서 Gizmos 활성화로 확인) 

@@ -5,7 +5,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 250f;
-    [SerializeField] private float groundedThreshold = 0.26f; // 플레이어 중심이 땅에서 얼마나 떨어져 있을 때 땅에 닿은 상태로 치는지 임계값
+    [SerializeField] private float groundedThreshold = 0.1f; // 플레이어 중심이 땅에서 얼마나 떨어져 있을 때 땅에 닿은 상태로 치는지 임계값
 
     [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
@@ -48,10 +48,12 @@ public class PlayerBehavior : MonoBehaviour
             rigidbody.AddForce(Vector2.up * jumpForce);
     }
 
-    private void CheckIsGrounded() // 플레이어가 땅에 닿아 있는 지 확인. 중앙에서 쏘는 걸론 문제가 있으므로 이후 다른 방식으로 대체.
+    private void CheckIsGrounded() // 플레이어가 땅에 닿아 있는 지 확인.
     {
-        Debug.DrawRay(transform.position, Vector2.down * groundedThreshold, Color.red);
-        if (Physics2D.Raycast(transform.position, Vector2.down, groundedThreshold, groundLayer).collider)
+        Vector2 lineStart = transform.position - new Vector3(transform.lossyScale.x/2, transform.lossyScale.y/2 + groundedThreshold);
+
+        Debug.DrawLine(lineStart, lineStart + new Vector2(transform.lossyScale.x, 0f), Color.red, 0.05f);
+        if (Physics2D.Linecast(lineStart, lineStart + new Vector2(transform.lossyScale.x, 0f), groundLayer).collider)
             isGrounded = true;
         else
             isGrounded = false;
