@@ -15,18 +15,21 @@ public class PlayerBehavior : MonoBehaviour
 
     private bool isGrounded; // 플레이어가 땅에 붙어있는가? true -> 붙어 있음.
     private int groundLayer; // isGrounded 체크를 위해 땅에 레이캐스트 시 적용할 레이어 마스크
+    private bool isOnKinematicObject;
     private int kinematicMapLayer; // isGrounded 체크를 위해 땅에 레이캐스트 시 적용할 레이어 마스크
 
     private Vector3 playerSpawner; // 플레이어 부활 위치
 
     void Awake()
     {
-        currentItemIndex = -1;
         rigidbody = GetComponent<Rigidbody2D>();
         itemPreview = GetComponentInChildren<ItemPreview>();
         groundLayer = ~(1 << LayerMask.NameToLayer("Player")); // 이 마스크 적용 시 Player 이외의 모든 레이어와 충돌.
         kinematicMapLayer = LayerMask.NameToLayer("MapKinematicObject");
         playerSpawner = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+
+        currentItemIndex = -1;
+        isOnKinematicObject = false; 
     }
 
     void Start()
@@ -61,10 +64,25 @@ public class PlayerBehavior : MonoBehaviour
         Vector2 lineStart = transform.position - new Vector3(transform.lossyScale.x/2, transform.lossyScale.y/2 + groundedThreshold);
 
         Debug.DrawLine(lineStart, lineStart + new Vector2(transform.lossyScale.x, 0f), Color.red, 0.05f);
-        if (Physics2D.Linecast(lineStart, lineStart + new Vector2(transform.lossyScale.x, 0f), groundLayer).collider)
+        RaycastHit2D hitResult = Physics2D.Linecast(lineStart, lineStart + new Vector2(transform.lossyScale.x, 0f), groundLayer);
+        if (hitResult.collider)
+        {
             isGrounded = true;
+            if (!isOnKinematicObject && hitResult.collider.gameObject.layer == kinematicMapLayer) // 플레이어가 움직이는 Kinematic 물체 위에 있는 지 확인
+            {
+                isOnKinematicObject = true;
+                transform.SetParent(hitResult.collider.transform); // 플레이어가 함께 움직이도록 한다.
+            }
+        }
         else
+        {
             isGrounded = false;
+            if (isOnKinematicObject)
+            {
+                isOnKinematicObject = false;
+                transform.SetParent(null);
+            }
+        }
     }
 
     private void SelectItem()
@@ -113,17 +131,5 @@ public class PlayerBehavior : MonoBehaviour
     private void Respawn()
     {
         transform.position = playerSpawner;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == kinematicMapLayer)
-            transform.SetParent(collision.transform);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == kinematicMapLayer)
-            transform.SetParent(null);
     }
 }
