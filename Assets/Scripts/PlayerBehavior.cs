@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -7,6 +8,11 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float groundSensorThreshold = 0.1f; // 플레이어 중심이 땅에서 얼마나 떨어져 있을 때 땅에 닿은 상태로 치는지 임계값
     [SerializeField] private float groundSensorPadding = 0.05f; // 땅에 붙어있는지 확인하는 라인 캐스트의 패딩 (좌우 여백)
+
+    /* 플레이어 입력 매핑 */
+    [SerializeField] private InputActionAsset inputActionAsset;
+    private InputActionMap fieldActionMap;
+    private InputAction moveAction, jumpAction, selectItemAction, spawnItemAction;
 
     [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
@@ -29,6 +35,12 @@ public class PlayerBehavior : MonoBehaviour
         kinematicMapLayer = LayerMask.NameToLayer("MapKinematicObject");
         playerSpawner = GameObject.FindGameObjectWithTag("Respawn").transform.position;
 
+        fieldActionMap = inputActionAsset.FindActionMap("field", true);
+        moveAction = fieldActionMap.FindAction("Move", true);
+        jumpAction = fieldActionMap.FindAction("Jump", true);
+        selectItemAction = fieldActionMap.FindAction("SelectItem", true);
+        spawnItemAction = fieldActionMap.FindAction("SpawnItem", true);
+
         currentItemIndex = -1;
         isOnKinematicObject = false; 
     }
@@ -38,25 +50,39 @@ public class PlayerBehavior : MonoBehaviour
         itemPreview.InitSpriteList(itemList);
     }
 
+    void OnEnable()
+    {
+        fieldActionMap.Enable();
+        jumpAction.performed += Jump;
+        selectItemAction.performed += SelectItem;
+        spawnItemAction.performed += SpawnItemAndRespawn;
+    }
+
+    void OnDisable()
+    {
+        fieldActionMap.Disable();
+        jumpAction.performed -= Jump;
+        selectItemAction.performed -= SelectItem;
+        spawnItemAction.performed -= SpawnItemAndRespawn;
+    }
+
     void FixedUpdate()
     {
         CheckIsGrounded();
-        Locomotion();        
+        Move();        
     }
 
-    private void Update()
+    private void Move() // 플레이어의 좌우 이동. FixedUpdate에서 호출.
     {
-        SelectItem();
-        LocateItemAndRespawn();
+        Vector3 moveInput = moveAction.ReadValue<Vector2>();
+
+        if (moveInput.magnitude >= 0.05f)
+            transform.position += moveInput * moveSpeed * Time.fixedDeltaTime;
     }
 
-    private void Locomotion() // 플레이어의 이동을 제어
+    private void Jump(InputAction.CallbackContext context) // 플레이어 점프 시 호출
     {
-        // 나중에 Input 클래스 대신 Input System Package 쓰는 걸로 수정.
-        float horizontal = Input.GetAxis("Horizontal");
-        if (horizontal != 0f)
-            transform.position += Vector3.right * horizontal * moveSpeed * Time.fixedDeltaTime;
-        if (isGrounded && Input.GetButton("Jump"))
+        if (isGrounded)
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
     }
 
@@ -76,53 +102,27 @@ public class PlayerBehavior : MonoBehaviour
             }
         }
         else
-        {
             isGrounded = false;
-            if (isOnKinematicObject)
-            {
-                isOnKinematicObject = false;
-                transform.SetParent(null);
-            }
+
+        if (isOnKinematicObject && (!hitResult.collider || hitResult.collider.gameObject.layer != kinematicMapLayer))
+        {
+            isOnKinematicObject = false;
+            transform.SetParent(null);
         }
     }
 
-    private void SelectItem()
+    private void SelectItem(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            currentItemIndex = 0;
-            itemPreview.ShowItemPreview(currentItemIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            currentItemIndex = 1;
-            itemPreview.ShowItemPreview(currentItemIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            currentItemIndex = 2;
-            itemPreview.ShowItemPreview(currentItemIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            currentItemIndex = 3;
-            itemPreview.ShowItemPreview(currentItemIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            currentItemIndex = 4;
-            itemPreview.ShowItemPreview(currentItemIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-            currentItemIndex = -1;
+        currentItemIndex = (int)selectItemAction.ReadValue<float>() - 1;
+        if (currentItemIndex < 0)
             itemPreview.HideItemPreview();
-        }
+        else
+            itemPreview.ShowItemPreview(currentItemIndex);
     }
 
-    private void LocateItemAndRespawn() 
+    private void SpawnItemAndRespawn(InputAction.CallbackContext context) // 왼쪽 시프트 누르면 아이템 배치 후 재시작.
     {
-        if (currentItemIndex != -1 && Input.GetKeyDown(KeyCode.LeftShift)) // 왼쪽 시프트 누르면 아이템 배치 후 재시작. 임시로 GetKeyDown 사용
+        if (currentItemIndex >= 0) // -1일 때 (선택된 아이템이 없을 때)는 취소됨.
         {
             Instantiate(itemList[currentItemIndex], transform.position, transform.rotation);
             Respawn();
