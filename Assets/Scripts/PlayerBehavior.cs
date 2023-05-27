@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
 
     [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
+    private ItemPreview itemPreview;
 
     private Rigidbody2D rigidbody;
 
@@ -20,11 +21,17 @@ public class PlayerBehavior : MonoBehaviour
 
     void Awake()
     {
-        currentItemIndex = 0;
+        currentItemIndex = -1;
         rigidbody = GetComponent<Rigidbody2D>();
+        itemPreview = GetComponentInChildren<ItemPreview>();
         groundLayer = ~(1 << LayerMask.NameToLayer("Player")); // 이 마스크 적용 시 Player 이외의 모든 레이어와 충돌.
         kinematicMapLayer = LayerMask.NameToLayer("MapKinematicObject");
         playerSpawner = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+    }
+
+    void Start()
+    {
+        itemPreview.InitSpriteList(itemList);
     }
 
     void FixedUpdate()
@@ -35,6 +42,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Update()
     {
+        SelectItem();
         LocateItemAndRespawn();
     }
 
@@ -59,9 +67,43 @@ public class PlayerBehavior : MonoBehaviour
             isGrounded = false;
     }
 
+    private void SelectItem()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentItemIndex = 0;
+            itemPreview.ShowItemPreview(currentItemIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentItemIndex = 1;
+            itemPreview.ShowItemPreview(currentItemIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentItemIndex = 2;
+            itemPreview.ShowItemPreview(currentItemIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            currentItemIndex = 3;
+            itemPreview.ShowItemPreview(currentItemIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            currentItemIndex = 4;
+            itemPreview.ShowItemPreview(currentItemIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            currentItemIndex = -1;
+            itemPreview.HideItemPreview();
+        }
+    }
+
     private void LocateItemAndRespawn() 
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift)) // 왼쪽 시프트 누르면 아이템 배치 후 재시작. 임시로 GetKeyDown 사용
+        if (currentItemIndex != -1 && Input.GetKeyDown(KeyCode.LeftShift)) // 왼쪽 시프트 누르면 아이템 배치 후 재시작. 임시로 GetKeyDown 사용
         {
             Instantiate(itemList[currentItemIndex], transform.position, transform.rotation);
             Respawn();
