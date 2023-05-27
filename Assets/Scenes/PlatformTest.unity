@@ -694,12 +694,16 @@ MonoBehaviour:
   jumpForce: 8
   groundSensorThreshold: 0.1
   groundSensorPadding: 0.05
+  inputActionAsset: {fileID: -944628639613478452, guid: 1b88e80fe3993534c89f0e6239e123ab, type: 3}
   itemList:
   - {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
   - {fileID: 5921187783522159812, guid: cc5a98fa07612df4d923ec725a63261f, type: 3}
   - {fileID: 5862212778858640658, guid: cdc0095672d9f1243bca09622a7a17f8, type: 3}
   - {fileID: 7217021420429784993, guid: aacd8faaf0a7cd64d840850529d90991, type: 3}
   - {fileID: 8701281312284536813, guid: b8e10389255377545be2c1f9dd2be7cc, type: 3}
+  - {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
+  - {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
+  - {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
 --- !u!1 &1593331857
 GameObject:
   m_ObjectHideFlags: 0
