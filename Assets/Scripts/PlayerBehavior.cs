@@ -100,22 +100,14 @@ public class PlayerBehavior : MonoBehaviour
                 isOnKinematicObject = true;
                 transform.SetParent(hitResult.collider.transform); // 플레이어가 함께 움직이도록 한다.
             }
-            /*
-            else if (isOnKinematicObject)
-            {
-                isOnKinematicObject = false;
-                transform.SetParent(null);
-            }
-            */
         }
         else
-        {
             isGrounded = false;
-            if (isOnKinematicObject)
-            {
-                isOnKinematicObject = false;
-                transform.SetParent(null);
-            }
+
+        if (isOnKinematicObject && (!hitResult.collider || hitResult.collider.gameObject.layer != kinematicMapLayer))
+        {
+            isOnKinematicObject = false;
+            transform.SetParent(null);
         }
     }
 
