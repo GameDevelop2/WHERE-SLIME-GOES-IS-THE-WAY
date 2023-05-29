@@ -90,7 +90,7 @@
                 {
                     "name": "",
                     "id": "76c6fe41-bf32-4ab8-925b-8fe0b2cab69e",
-                    "path": "<Keyboard>/backquote",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "Scale(factor=0)",
                     "groups": "",
@@ -101,7 +101,7 @@
                 {
                     "name": "",
                     "id": "9497cafb-6719-4653-91b6-5fffdb80e141",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "Scale",
                     "groups": "",
@@ -112,7 +112,7 @@
                 {
                     "name": "",
                     "id": "be29f73c-4494-4071-a62f-636cef74a335",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "Scale(factor=2)",
                     "groups": "",
@@ -123,7 +123,7 @@
                 {
                     "name": "",
                     "id": "02d8be6c-3744-4a50-be53-9a452e5ab433",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "Scale(factor=3)",
                     "groups": "",
@@ -134,7 +134,7 @@
                 {
                     "name": "",
                     "id": "16720471-e2b4-492c-9d76-6afa846fc94a",
-                    "path": "<Keyboard>/4",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "Scale(factor=4)",
                     "groups": "",
@@ -145,7 +145,7 @@
                 {
                     "name": "",
                     "id": "00aa2078-489b-415c-90f3-800601d2933c",
-                    "path": "<Keyboard>/5",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "Scale(factor=5)",
                     "groups": "",
@@ -156,7 +156,7 @@
                 {
                     "name": "",
                     "id": "3331e772-b984-4588-a2eb-f7241fe1113c",
-                    "path": "<Keyboard>/6",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "Scale(factor=6)",
                     "groups": "",
@@ -167,7 +167,7 @@
                 {
                     "name": "",
                     "id": "a1935455-96d8-4651-b744-a4f88430185b",
-                    "path": "<Keyboard>/7",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "Scale(factor=7)",
                     "groups": "",
@@ -178,7 +178,7 @@
                 {
                     "name": "",
                     "id": "31facde1-97b1-4d7f-b409-a56201111ac8",
-                    "path": "<Keyboard>/8",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "Scale(factor=8)",
                     "groups": "",
