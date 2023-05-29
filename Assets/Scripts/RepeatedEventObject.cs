@@ -3,7 +3,8 @@ using UnityEngine.Events;
 
 public class RepeatedEventObject : MonoBehaviour
 {
-    [SerializeField] private UnityEvent eventOnPlayerContact;
+    [SerializeField] private UnityEvent eventOnEveryPeriod;
+    [SerializeField] private UnityEvent<GameObject> eventOnEveryPeriod_GameObjectParam;
     [SerializeField] private float eventPeriod = 5f;
     [SerializeField] private bool invokeEventOnStart;
 
@@ -23,7 +24,8 @@ public class RepeatedEventObject : MonoBehaviour
 
         if (currentEventCooltime <= 0f)
         {
-            eventOnPlayerContact?.Invoke();
+            eventOnEveryPeriod?.Invoke();
+            eventOnEveryPeriod_GameObjectParam?.Invoke(gameObject);
             currentEventCooltime = eventPeriod;
         }
     }
