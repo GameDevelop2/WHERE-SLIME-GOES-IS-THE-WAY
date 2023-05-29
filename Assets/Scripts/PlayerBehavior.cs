@@ -18,7 +18,7 @@ public class PlayerBehavior : MonoBehaviour
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
     private ItemPreview itemPreview;
 
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D player_rigidbody;
 
     private bool isGrounded; // 플레이어가 땅에 붙어있는가? true -> 붙어 있음.
     private int groundLayer; // isGrounded 체크를 위해 땅에 레이캐스트 시 적용할 레이어 마스크
@@ -29,7 +29,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        player_rigidbody = GetComponent<Rigidbody2D>();
         itemPreview = GetComponentInChildren<ItemPreview>();
         groundLayer = ~(1 << LayerMask.NameToLayer("Player")); // 이 마스크 적용 시 Player 이외의 모든 레이어와 충돌.
         kinematicMapLayer = LayerMask.NameToLayer("MapKinematicObject");
@@ -83,7 +83,7 @@ public class PlayerBehavior : MonoBehaviour
     private void Jump(InputAction.CallbackContext context) // 플레이어 점프 시 호출
     {
         if (isGrounded)
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+            player_rigidbody.velocity = new Vector2(player_rigidbody.velocity.x, jumpForce);
     }
 
     private void CheckIsGrounded() // 플레이어가 땅에 닿아 있는 지 확인.

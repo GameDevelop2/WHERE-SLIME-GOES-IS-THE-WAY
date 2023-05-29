@@ -7,7 +7,7 @@ public class MovePlatform : MonoBehaviour
     [SerializeField] private float switchDirectionThreshold = 0.1f;
 
     private Vector3 moveDirection;
-    private Rigidbody2D rigidbody;
+    // private Rigidbody2D rigidbody;
 
     private LayerMask staticMapLayer; // MapStaticObject 레이어
 
@@ -16,7 +16,7 @@ public class MovePlatform : MonoBehaviour
         staticMapLayer = LayerMask.NameToLayer("MapStaticObject");
         staticMapLayer = 1 << staticMapLayer;
 
-        rigidbody = GetComponent<Rigidbody2D>();
+        // rigidbody = GetComponent<Rigidbody2D>();
 
         if (horizontalMove)
             moveDirection = Vector3.right;
