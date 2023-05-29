@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YoonLevelManager : MonoBehaviour
 {
-    [SerializeField] GameObject fallingRockPrefab;
+    [SerializeField] GameObject fallingRockObject;
 
     PlayerBehavior playerBehaviorComponent;
 
@@ -21,7 +21,8 @@ public class YoonLevelManager : MonoBehaviour
 
     public void SpawnFallingRock(GameObject spawner)
     {
-        Instantiate<GameObject>(fallingRockPrefab, spawner.transform.position, fallingRockPrefab.transform.rotation);
+        GameObject fallingRockCopy = Instantiate<GameObject>(fallingRockObject, spawner.transform.position, fallingRockObject.transform.rotation);
+        fallingRockCopy.GetComponent<Rigidbody2D>().simulated = true;
     }
 
     public void OnFallingRockCollision(Collider2D collider, GameObject rockObject)
@@ -29,6 +30,8 @@ public class YoonLevelManager : MonoBehaviour
         if (collider.CompareTag("Player"))
             playerBehaviorComponent.Respawn();
         else
-            Destroy(rockObject);
+            Destroy(rockObject, 0.03f);
     }
+
+
 }
