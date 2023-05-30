@@ -1595,8 +1595,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   jumpForce: 250
-  groundSensorThreshold: 0.1
-  groundSensorPadding: 0.05
+  groundSensorOffset: {x: 0, y: -0.25, z: 0}
+  groundSensorSize: {x: 0.4, y: 0.3}
   inputActionAsset: {fileID: -944628639613478452, guid: 1b88e80fe3993534c89f0e6239e123ab, type: 3}
   itemList:
   - {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}

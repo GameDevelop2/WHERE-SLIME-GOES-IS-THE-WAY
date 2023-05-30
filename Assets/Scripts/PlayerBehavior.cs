@@ -6,8 +6,9 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float groundSensorThreshold = 0.1f; // 플레이어 중심이 땅에서 얼마나 떨어져 있을 때 땅에 닿은 상태로 치는지 임계값
-    [SerializeField] private float groundSensorPadding = 0.05f; // 땅에 붙어있는지 확인하는 라인 캐스트의 패딩 (좌우 여백)
+
+    [SerializeField] private Vector3 groundSensorOffset; 
+    [SerializeField] private Vector2 groundSensorSize;
 
     /* 플레이어 입력 매핑 */
     [SerializeField] private InputActionAsset inputActionAsset;
@@ -88,10 +89,15 @@ public class PlayerBehavior : MonoBehaviour
 
     private void CheckIsGrounded() // 플레이어가 땅에 닿아 있는 지 확인.
     {
-        Vector2 lineStart = transform.position - new Vector3(transform.lossyScale.x/2 - groundSensorPadding, transform.lossyScale.y/2 + groundSensorThreshold);
+        Vector2 sensorCenter = transform.position + groundSensorOffset;
 
-        Debug.DrawLine(lineStart, lineStart + new Vector2(transform.lossyScale.x - 2*groundSensorPadding, 0f), Color.red, 0.05f);
-        RaycastHit2D hitResult = Physics2D.Linecast(lineStart, lineStart + new Vector2(transform.lossyScale.x, 0f), groundLayer);
+        // Debug
+        Vector2 sensorLeftBottom = sensorCenter - new Vector2(groundSensorSize.x / 2, groundSensorSize.y / 2);
+        Vector2 sensorRightTop = sensorCenter + new Vector2(groundSensorSize.x / 2, groundSensorSize.y / 2);
+        Debug.DrawLine(sensorLeftBottom, sensorRightTop, Color.red, 0.05f);
+        Debug.DrawLine(new Vector2(sensorLeftBottom.x, sensorRightTop.y), new Vector2(sensorRightTop.x, sensorLeftBottom.y), Color.red, 0.05f);
+
+        RaycastHit2D hitResult = Physics2D.BoxCast(sensorCenter, groundSensorSize, 0f, Vector2.down, 0f, groundLayer);
         if (hitResult.collider)
         {
             isGrounded = true;
