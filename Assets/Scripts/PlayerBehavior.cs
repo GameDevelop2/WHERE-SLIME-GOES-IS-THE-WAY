@@ -94,8 +94,8 @@ public class PlayerBehavior : MonoBehaviour
         // Debug
         Vector2 sensorLeftBottom = sensorCenter - new Vector2(groundSensorSize.x / 2, groundSensorSize.y / 2);
         Vector2 sensorRightTop = sensorCenter + new Vector2(groundSensorSize.x / 2, groundSensorSize.y / 2);
-        Debug.DrawLine(sensorLeftBottom, sensorRightTop, Color.red, 0.05f);
-        Debug.DrawLine(new Vector2(sensorLeftBottom.x, sensorRightTop.y), new Vector2(sensorRightTop.x, sensorLeftBottom.y), Color.red, 0.05f);
+        Debug.DrawLine(sensorLeftBottom, sensorRightTop, Color.red, Time.fixedDeltaTime);
+        Debug.DrawLine(new Vector2(sensorLeftBottom.x, sensorRightTop.y), new Vector2(sensorRightTop.x, sensorLeftBottom.y), Color.red, Time.fixedDeltaTime);
 
         RaycastHit2D hitResult = Physics2D.BoxCast(sensorCenter, groundSensorSize, 0f, Vector2.down, 0f, groundLayer);
         if (hitResult.collider)
