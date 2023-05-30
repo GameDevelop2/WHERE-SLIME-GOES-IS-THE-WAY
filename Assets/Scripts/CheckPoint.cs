@@ -14,7 +14,6 @@ public class CheckPoint : MonoBehaviour
     {
         if (!isChecked && collision.CompareTag("Player") && playerSpawner)
         {
-            Debug.Log($"{collision.name}");
             isChecked = true;
             playerSpawner.transform.position = transform.position;
         }

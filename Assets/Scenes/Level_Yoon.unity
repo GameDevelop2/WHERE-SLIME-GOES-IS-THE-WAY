@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 373167727}
   - component: {fileID: 373167726}
   - component: {fileID: 373167728}
+  - component: {fileID: 373167729}
   m_Layer: 6
   m_Name: BreakableFloorTilemap
   m_TagString: Untagged
@@ -617,6 +618,19 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &373167729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373167724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dff0d80a01719d438a919aaa066a5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakOnBreakerCollision: 1
 --- !u!1 &377908698
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,7 +3191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942072460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.98, y: 5.9, z: 0}
+  m_LocalPosition: {x: 5.51, y: 5.9, z: 0}
   m_LocalScale: {x: 1.6, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3331,6 +3345,10 @@ PrefabInstance:
     - target: {fileID: 6625666829841694703, guid: ce0b4c34310404f4d94838188c45b041, type: 3}
       propertyPath: m_Name
       value: FallingRockOriginal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625666829841694703, guid: ce0b4c34310404f4d94838188c45b041, type: 3}
+      propertyPath: m_TagString
+      value: Breaker
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce0b4c34310404f4d94838188c45b041, type: 3}
@@ -5743,7 +5761,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 9, y: 5, z: 0}
+  - first: {x: 13, y: 5, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
