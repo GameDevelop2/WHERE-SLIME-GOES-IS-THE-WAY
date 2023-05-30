@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +31,7 @@ public class YoonLevelManager : MonoBehaviour
 
     public void SpawnFallingRock(GameObject spawner)
     {
+        // 부하 심할 시 오브젝트 풀링 방식으로 변경
         GameObject fallingRockCopy = Instantiate<GameObject>(fallingRockObject, spawner.transform.position, fallingRockObject.transform.rotation);
         fallingRockCopy.GetComponent<Rigidbody2D>().simulated = true;
     }
