@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class YoonLevelManager : MonoBehaviour
 {
-    [SerializeField] GameObject fallingRockObject;
+    [SerializeField] private GameObject fallingRockObject;
 
-    PlayerBehavior playerBehaviorComponent;
+    private PlayerBehavior playerBehaviorComponent;
+    private Transform exitPortalTransform;
 
     void Awake()
     {
         playerBehaviorComponent = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>();
+
+        foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Portal"))
+        {
+            if (gameObject.name.Equals("ExitPortal"))
+            {
+                exitPortalTransform = gameObject.transform;
+                break;
+            }
+        }
     }
     
     public void RespawnPlayerIfContacted(Collider2D collider)
@@ -33,5 +43,9 @@ public class YoonLevelManager : MonoBehaviour
             Destroy(rockObject, 0.03f);
     }
 
-
+    public void OnEnterPortalContact(Collider2D collider)
+    {
+        if (collider.CompareTag("Player"))
+            playerBehaviorComponent.gameObject.transform.position = exitPortalTransform.position;
+    }
 }

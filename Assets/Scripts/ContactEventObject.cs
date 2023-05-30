@@ -5,9 +5,9 @@ public class ContactEventObject : MonoBehaviour
 {
     [SerializeField] private UnityEvent<Collider2D> eventOnContact;
     [SerializeField] private UnityEvent<Collider2D, GameObject> eventOnContact_GameObjectParam;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        eventOnContact?.Invoke(collision);
-        eventOnContact_GameObjectParam?.Invoke(collision, gameObject);
+        eventOnContact?.Invoke(collider);
+        eventOnContact_GameObjectParam?.Invoke(collider, gameObject);
     }
 }
