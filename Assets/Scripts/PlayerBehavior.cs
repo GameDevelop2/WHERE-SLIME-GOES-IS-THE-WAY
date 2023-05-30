@@ -25,7 +25,7 @@ public class PlayerBehavior : MonoBehaviour
     private bool isOnKinematicObject;
     private int kinematicMapLayer; // isGrounded 체크를 위해 땅에 레이캐스트 시 적용할 레이어 마스크
 
-    private Vector3 playerSpawner; // 플레이어 부활 위치
+    private Transform playerSpawner; // 플레이어 부활 위치
 
     void Awake()
     {
@@ -33,7 +33,7 @@ public class PlayerBehavior : MonoBehaviour
         itemPreview = GetComponentInChildren<ItemPreview>();
         groundLayer = ~(1 << LayerMask.NameToLayer("Player")); // 이 마스크 적용 시 Player 이외의 모든 레이어와 충돌.
         kinematicMapLayer = LayerMask.NameToLayer("MapKinematicObject");
-        playerSpawner = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        playerSpawner = GameObject.FindGameObjectWithTag("Respawn").transform;
 
         fieldActionMap = inputActionAsset.FindActionMap("field", true);
         moveAction = fieldActionMap.FindAction("Move", true);
@@ -129,9 +129,9 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private void Respawn()
+    public void Respawn()
     {
-        transform.position = playerSpawner;
+        transform.position = playerSpawner.position;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
