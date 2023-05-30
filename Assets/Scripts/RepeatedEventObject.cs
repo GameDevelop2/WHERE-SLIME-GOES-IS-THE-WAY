@@ -6,16 +6,13 @@ public class RepeatedEventObject : MonoBehaviour
     [SerializeField] private UnityEvent eventOnEveryPeriod;
     [SerializeField] private UnityEvent<GameObject> eventOnEveryPeriod_GameObjectParam;
     [SerializeField] private float eventPeriod = 5f;
-    [SerializeField] private bool invokeEventOnStart;
+    [SerializeField] private float initialDelayBeforeEventStart = 0f;
 
     private float currentEventCooltime;
 
     void Awake()
     {
-        if (invokeEventOnStart)
-            currentEventCooltime = 0f;
-        else
-            currentEventCooltime = eventPeriod;
+        currentEventCooltime = initialDelayBeforeEventStart;
     }
     
     void Update()
