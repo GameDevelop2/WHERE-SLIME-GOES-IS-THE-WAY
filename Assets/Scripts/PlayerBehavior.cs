@@ -133,4 +133,14 @@ public class PlayerBehavior : MonoBehaviour
     {
         transform.position = playerSpawner;
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("obstacle"))
+        {
+    
+            Respawn();
+        }
+    }
+    
+
 }
