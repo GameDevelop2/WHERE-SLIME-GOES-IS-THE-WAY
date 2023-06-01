@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartGame.unity
-    guid: 0028a81505d615b49b89a729abbb8b13
-  - enabled: 1
     path: Assets/Scenes/StageSelect.unity
     guid: e0d59d50a57affb4faefcab322e732e8
   - enabled: 1
-    path: Assets/Scenes/Level_Yoon.unity
+    path: Assets/Scenes/Stage2.unity
     guid: 4d800d32ee570e44c90925a65337feae
   m_configObjects: {}
