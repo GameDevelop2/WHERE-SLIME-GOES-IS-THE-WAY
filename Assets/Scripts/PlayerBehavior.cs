@@ -18,6 +18,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
     private ItemPreview itemPreview;
+    Stack<GameObject> spawnedItemStack;
 
     private Rigidbody2D player_rigidbody;
 
@@ -41,6 +42,8 @@ public class PlayerBehavior : MonoBehaviour
         jumpAction = fieldActionMap.FindAction("Jump", true);
         selectItemAction = fieldActionMap.FindAction("SelectItem", true);
         spawnItemAction = fieldActionMap.FindAction("SpawnItem", true);
+
+        spawnedItemStack = new Stack<GameObject>();
 
         currentItemIndex = -1;
         isOnKinematicObject = false; 
@@ -130,9 +133,19 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (currentItemIndex >= 0) // -1일 때 (선택된 아이템이 없을 때)는 취소됨.
         {
-            Instantiate(itemList[currentItemIndex], transform.position, transform.rotation);
+            spawnedItemStack.Push(Instantiate(itemList[currentItemIndex], transform.position, transform.rotation));
             Respawn();
         }
+    }
+
+    private void RemoveLastSpawnedItem(InputAction.CallbackContext context)
+    {
+        if (spawnedItemStack.Count <= 0)
+            return;
+
+        GameObject lastSpawnedItem = spawnedItemStack.Pop();
+        lastSpawnedItem.SetActive(false);
+        Destroy(lastSpawnedItem);
     }
 
     public void Respawn()
