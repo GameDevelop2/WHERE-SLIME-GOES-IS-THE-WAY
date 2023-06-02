@@ -13,7 +13,7 @@ public class PlayerBehavior : MonoBehaviour
     /* 플레이어 입력 매핑 */
     [SerializeField] private InputActionAsset inputActionAsset;
     private InputActionMap fieldActionMap;
-    private InputAction moveAction, jumpAction, selectItemAction, spawnItemAction;
+    private InputAction moveAction, jumpAction, selectItemAction, spawnItemAction, removeItemAction;
 
     [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
@@ -42,6 +42,7 @@ public class PlayerBehavior : MonoBehaviour
         jumpAction = fieldActionMap.FindAction("Jump", true);
         selectItemAction = fieldActionMap.FindAction("SelectItem", true);
         spawnItemAction = fieldActionMap.FindAction("SpawnItem", true);
+        removeItemAction = fieldActionMap.FindAction("RemoveItem", true);
 
         spawnedItemStack = new Stack<GameObject>();
 
@@ -60,6 +61,7 @@ public class PlayerBehavior : MonoBehaviour
         jumpAction.performed += Jump;
         selectItemAction.performed += SelectItem;
         spawnItemAction.performed += SpawnItemAndRespawn;
+        removeItemAction.performed += RemoveLastSpawnedItem;
     }
 
     void OnDisable()
@@ -68,6 +70,7 @@ public class PlayerBehavior : MonoBehaviour
         jumpAction.performed -= Jump;
         selectItemAction.performed -= SelectItem;
         spawnItemAction.performed -= SpawnItemAndRespawn;
+        removeItemAction.performed -= RemoveLastSpawnedItem;
     }
 
     void FixedUpdate()
