@@ -13,11 +13,12 @@ public class PlayerBehavior : MonoBehaviour
     /* 플레이어 입력 매핑 */
     [SerializeField] private InputActionAsset inputActionAsset;
     private InputActionMap fieldActionMap;
-    private InputAction moveAction, jumpAction, selectItemAction, spawnItemAction;
+    private InputAction moveAction, jumpAction, selectItemAction, spawnItemAction, removeItemAction;
 
     [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
     private ItemPreview itemPreview;
+    Stack<GameObject> spawnedItemStack;
 
     private Rigidbody2D player_rigidbody;
 
@@ -41,6 +42,9 @@ public class PlayerBehavior : MonoBehaviour
         jumpAction = fieldActionMap.FindAction("Jump", true);
         selectItemAction = fieldActionMap.FindAction("SelectItem", true);
         spawnItemAction = fieldActionMap.FindAction("SpawnItem", true);
+        removeItemAction = fieldActionMap.FindAction("RemoveItem", true);
+
+        spawnedItemStack = new Stack<GameObject>();
 
         currentItemIndex = -1;
         isOnKinematicObject = false; 
@@ -57,6 +61,7 @@ public class PlayerBehavior : MonoBehaviour
         jumpAction.performed += Jump;
         selectItemAction.performed += SelectItem;
         spawnItemAction.performed += SpawnItemAndRespawn;
+        removeItemAction.performed += RemoveLastSpawnedItem;
     }
 
     void OnDisable()
@@ -65,6 +70,7 @@ public class PlayerBehavior : MonoBehaviour
         jumpAction.performed -= Jump;
         selectItemAction.performed -= SelectItem;
         spawnItemAction.performed -= SpawnItemAndRespawn;
+        removeItemAction.performed -= RemoveLastSpawnedItem;
     }
 
     void FixedUpdate()
@@ -130,9 +136,24 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (currentItemIndex >= 0) // -1일 때 (선택된 아이템이 없을 때)는 취소됨.
         {
-            Instantiate(itemList[currentItemIndex], transform.position, transform.rotation);
+            spawnedItemStack.Push(Instantiate(itemList[currentItemIndex], transform.position, transform.rotation));
             Respawn();
         }
+    }
+
+    private void RemoveLastSpawnedItem(InputAction.CallbackContext context)
+    {
+        if (spawnedItemStack.Count <= 0)
+            return;
+
+        GameObject lastSpawnedItem = spawnedItemStack.Pop();
+
+        // 해당 아이템이 플레이어의 부모 오브젝트인 경우 플레이어를 최상위 계층으로 꺼낸다.
+        // ex) 플레이어가 움직이는 발판 위에 올라가면 해당 발판의 자식이 됨.
+        if (transform.IsChildOf(lastSpawnedItem.transform))
+            transform.SetParent(null);
+
+        Destroy(lastSpawnedItem);
     }
 
     public void Respawn()
