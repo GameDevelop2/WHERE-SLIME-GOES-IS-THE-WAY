@@ -147,6 +147,12 @@ public class PlayerBehavior : MonoBehaviour
             return;
 
         GameObject lastSpawnedItem = spawnedItemStack.Pop();
+
+        // 해당 아이템이 플레이어의 부모 오브젝트인 경우 플레이어를 최상위 계층으로 꺼낸다.
+        // ex) 플레이어가 움직이는 발판 위에 올라가면 해당 발판의 자식이 됨.
+        if (transform.IsChildOf(lastSpawnedItem.transform))
+            transform.SetParent(null);
+
         lastSpawnedItem.SetActive(false);
         Destroy(lastSpawnedItem);
     }
