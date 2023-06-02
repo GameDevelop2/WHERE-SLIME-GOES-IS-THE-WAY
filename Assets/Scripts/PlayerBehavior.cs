@@ -153,7 +153,6 @@ public class PlayerBehavior : MonoBehaviour
         if (transform.IsChildOf(lastSpawnedItem.transform))
             transform.SetParent(null);
 
-        lastSpawnedItem.SetActive(false);
         Destroy(lastSpawnedItem);
     }
 
