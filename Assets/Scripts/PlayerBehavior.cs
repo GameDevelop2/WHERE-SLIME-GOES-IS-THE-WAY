@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -167,5 +168,6 @@ public class PlayerBehavior : MonoBehaviour
     private void RestartLevel(InputAction.CallbackContext context)
     {
         Debug.Log("PlayerBehavior - RestartLevel");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 }
