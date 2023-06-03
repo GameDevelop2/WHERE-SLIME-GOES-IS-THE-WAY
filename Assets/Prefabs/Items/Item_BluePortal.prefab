@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 820798380752102928}
   - component: {fileID: 820798380752102933}
   - component: {fileID: 820798380752102932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item_BluePortal
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
