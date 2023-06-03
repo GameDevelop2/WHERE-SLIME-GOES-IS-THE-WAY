@@ -184,21 +184,10 @@
                 },
                 {
                     "name": "",
-                    "id": "a1935455-96d8-4651-b744-a4f88430185b",
+                    "id": "50e80242-2a3e-4da9-a032-4cdd47190a38",
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "Scale(factor=7)",
-                    "groups": "",
-                    "action": "SelectItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "31facde1-97b1-4d7f-b409-a56201111ac8",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "Scale(factor=8)",
                     "groups": "",
                     "action": "SelectItem",
                     "isComposite": false,

@@ -39,7 +39,7 @@ public class PlayerBehavior : MonoBehaviour
         player_rigidbody = GetComponent<Rigidbody2D>();
         itemPreview = GetComponentInChildren<ItemPreview>();
         kinematicMapLayer = LayerMask.NameToLayer("MapKinematicObject");
-        groundLayer = (1 << LayerMask.NameToLayer("MapStaticObject")) | kinematicMapLayer; // MapStaticObject와 MapKinematicObject 레이어만 ground로 인식
+        groundLayer = (1 << LayerMask.NameToLayer("MapStaticObject")) | (1 << kinematicMapLayer); // MapStaticObject와 MapKinematicObject 레이어만 ground로 인식
         playerSpawner = GameObject.FindGameObjectWithTag("Respawn").transform;
 
         fieldActionMap = inputActionAsset.FindActionMap("field", true);
@@ -165,9 +165,13 @@ public class PlayerBehavior : MonoBehaviour
         if (spawnedItemStack.Count <= 0)
             return;
 
+        while (!spawnedItemStack.Peek()) // 다른 요소에 의해 삭제된 아이템이 스택탑에 있다면 제거한다.
+        {
+            spawnedItemStack.Pop();
+            if (spawnedItemStack.Count <= 0)
+                return;
+        }
         GameObject lastSpawnedItem = spawnedItemStack.Pop();
-        if (!lastSpawnedItem)
-            return;
 
         // 해당 아이템이 플레이어의 부모 오브젝트인 경우 플레이어를 최상위 계층으로 꺼낸다.
         // ex) 플레이어가 움직이는 발판 위에 올라가면 해당 발판의 자식이 됨.

@@ -39,13 +39,19 @@ public class Portal : MonoBehaviour
 
         if (isBluePortal)
         {
-            collision.transform.position = orangePortal.transform.position;
-            orangePortal.isTeleportUnabled = true;
+            if (orangePortal)
+            {
+                collision.transform.position = orangePortal.transform.position;
+                orangePortal.isTeleportUnabled = true;
+            }
         }
         else
         {
-            collision.transform.position = bluePortal.transform.position;
-            bluePortal.isTeleportUnabled = true;
+            if (bluePortal)
+            {
+                collision.transform.position = bluePortal.transform.position;
+                bluePortal.isTeleportUnabled = true;
+            }
         }
     }
 
