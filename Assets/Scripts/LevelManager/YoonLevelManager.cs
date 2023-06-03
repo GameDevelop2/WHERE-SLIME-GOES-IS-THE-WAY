@@ -40,8 +40,10 @@ public class YoonLevelManager : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
             playerBehaviorComponent.Respawn();
-        else
-            Destroy(rockObject, 0.03f);
+        else if (collider.CompareTag("Portal"))
+            return;
+
+        Destroy(rockObject, 0.03f);
     }
 
     public void OnEnterPortalContact(Collider2D collider)
