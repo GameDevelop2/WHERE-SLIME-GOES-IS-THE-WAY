@@ -8,7 +8,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 5f;
 
-    [SerializeField] private Vector3 groundSensorOffset; 
+    [SerializeField] private Vector3 groundSensorOffset;
     [SerializeField] private Vector2 groundSensorSize;
 
     /* 플레이어 입력 매핑 */
@@ -30,6 +30,10 @@ public class PlayerBehavior : MonoBehaviour
 
     private Transform playerSpawner; // 플레이어 부활 위치
 
+    [SerializeField] UnityEngine.UI.Image restartFadeOutImage;
+    private bool isHoldingRestartButton;
+    private float restartButtonHoldedTime;
+
     void Awake()
     {
         player_rigidbody = GetComponent<Rigidbody2D>();
@@ -49,7 +53,9 @@ public class PlayerBehavior : MonoBehaviour
         spawnedItemStack = new Stack<GameObject>();
 
         currentItemIndex = -1;
-        isOnKinematicObject = false; 
+        isOnKinematicObject = false;
+        restartButtonHoldedTime = 0f;
+        isHoldingRestartButton = false;
     }
 
     void Start()
@@ -65,6 +71,8 @@ public class PlayerBehavior : MonoBehaviour
         spawnItemAction.performed += SpawnItemAndRespawn;
         removeItemAction.performed += RemoveLastSpawnedItem;
         restartLevelAction.performed += RestartLevel;
+        restartLevelAction.started += OnRestartActionStarted;
+        restartLevelAction.canceled += OnRestartActionCanceled;
     }
 
     void OnDisable()
@@ -75,12 +83,19 @@ public class PlayerBehavior : MonoBehaviour
         spawnItemAction.performed -= SpawnItemAndRespawn;
         removeItemAction.performed -= RemoveLastSpawnedItem;
         restartLevelAction.performed -= RestartLevel;
+        restartLevelAction.started -= OnRestartActionStarted;
+        restartLevelAction.canceled -= OnRestartActionCanceled;
+    }
+
+    void Update()
+    {
+        FadeOutIfHoldingRestart();
     }
 
     void FixedUpdate()
     {
         CheckIsGrounded();
-        Move();        
+        Move();
     }
 
     private void Move() // 플레이어의 좌우 이동. FixedUpdate에서 호출.
@@ -169,5 +184,28 @@ public class PlayerBehavior : MonoBehaviour
     {
         Debug.Log("PlayerBehavior - RestartLevel");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+    }
+
+    private void OnRestartActionStarted(InputAction.CallbackContext context)
+    {
+        isHoldingRestartButton = true;
+        restartButtonHoldedTime = 0f;
+    }
+
+    private void OnRestartActionCanceled(InputAction.CallbackContext context)
+    {
+        isHoldingRestartButton = false;
+        restartButtonHoldedTime = 0f;
+        if (restartFadeOutImage)
+            restartFadeOutImage.color = Color.clear;
+    }
+
+    private void FadeOutIfHoldingRestart()
+    {
+        if (isHoldingRestartButton)
+        {
+            restartButtonHoldedTime += Time.deltaTime;
+            restartFadeOutImage.color = Color.Lerp(Color.clear, Color.black, restartButtonHoldedTime / 1.9f); // 인식까지의 시간 0.5초를 제외한 HoldTime은 2f, 완전히 암전한 화면을 보여주기 위해 0.1f 줄임
+        }
     }
 }
