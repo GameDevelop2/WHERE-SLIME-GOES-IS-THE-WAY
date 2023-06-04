@@ -6,7 +6,6 @@ public class Portal : MonoBehaviour
     [HideInInspector] public bool isTeleportUnabled;
     public static Portal bluePortal = null, orangePortal = null;
 
-
     void OnEnable()
     {
         isTeleportUnabled = false;

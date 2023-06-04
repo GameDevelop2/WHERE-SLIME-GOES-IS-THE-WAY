@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4035610496997730160}
   - component: {fileID: 4035610496997730167}
   - component: {fileID: 4035610496997730166}
-  - component: {fileID: 4035610496997730161}
+  - component: {fileID: 5889854643116961471}
   - component: {fileID: 4035610496997730162}
   m_Layer: 8
   m_Name: LO_Portal_Orange
@@ -103,7 +103,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.65}
   m_Size: {x: 0.6, y: 1.3}
   m_Direction: 0
---- !u!114 &4035610496997730161
+--- !u!114 &5889854643116961471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4035610496997730165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 952410f2a4b9b124c8c822885499d22e, type: 3}
+  m_Script: {fileID: 11500000, guid: 08a32fda64c556440a7eb35ff200f66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isBluePortal: 0
