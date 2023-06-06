@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b31b903e4754fe4abe77e55b30a51b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multipliedColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!212 &122514652
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0.39215687}
   m_FlipX: 0
@@ -7836,14 +7837,39 @@ MonoBehaviour:
   groundSensorOffset: {x: 0, y: 0, z: 0}
   groundSensorSize: {x: 0.4, y: 0.25}
   inputActionAsset: {fileID: -944628639613478452, guid: 1b88e80fe3993534c89f0e6239e123ab, type: 3}
-  itemList:
-  - {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
-  - {fileID: 5921187783522159812, guid: cc5a98fa07612df4d923ec725a63261f, type: 3}
-  - {fileID: 5862212778858640658, guid: cdc0095672d9f1243bca09622a7a17f8, type: 3}
-  - {fileID: 7217021420429784993, guid: aacd8faaf0a7cd64d840850529d90991, type: 3}
-  - {fileID: 8701281312284536813, guid: b8e10389255377545be2c1f9dd2be7cc, type: 3}
-  - {fileID: 820798380752102929, guid: 413ef513d1d8a3b4f848a185b36f10b3, type: 3}
-  - {fileID: 8290247961173689253, guid: d491db2e8bbb81b4abd1b3b58d4d61fe, type: 3}
+  itemInfoList:
+  - prefab: {fileID: 0}
+    sprite: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    panelOnItemSelectUI: {fileID: 1628102779}
+  - prefab: {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
+    sprite: {fileID: 21300000, guid: 2cfe758c6fcd541409afd4743ae09c57, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    panelOnItemSelectUI: {fileID: 844515149}
+  - prefab: {fileID: 5921187783522159812, guid: cc5a98fa07612df4d923ec725a63261f, type: 3}
+    sprite: {fileID: 21300000, guid: 1c208fa3979d2734eaf7d961c95e9a3d, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    panelOnItemSelectUI: {fileID: 2106074308}
+  - prefab: {fileID: 5862212778858640658, guid: cdc0095672d9f1243bca09622a7a17f8, type: 3}
+    sprite: {fileID: 21300000, guid: 80a72575231862a4586b63337835c573, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    panelOnItemSelectUI: {fileID: 807229269}
+  - prefab: {fileID: 7217021420429784993, guid: aacd8faaf0a7cd64d840850529d90991, type: 3}
+    sprite: {fileID: 21300000, guid: 80a72575231862a4586b63337835c573, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    panelOnItemSelectUI: {fileID: 880394743}
+  - prefab: {fileID: 8701281312284536813, guid: b8e10389255377545be2c1f9dd2be7cc, type: 3}
+    sprite: {fileID: 21300000, guid: fc41f37193cdf95418314dbcab48c490, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    panelOnItemSelectUI: {fileID: 419073685}
+  - prefab: {fileID: 820798380752102929, guid: 413ef513d1d8a3b4f848a185b36f10b3, type: 3}
+    sprite: {fileID: 21300000, guid: 72b1b6b7bfcabc540a7d0f7f8647bfb7, type: 3}
+    color: {r: 0.4745098, g: 1, b: 0.5372549, a: 1}
+    panelOnItemSelectUI: {fileID: 1541062883}
+  - prefab: {fileID: 8290247961173689253, guid: d491db2e8bbb81b4abd1b3b58d4d61fe, type: 3}
+    sprite: {fileID: 21300000, guid: c83cd8afb44e10743a1d24d9881f58ca, type: 3}
+    color: {r: 0.4745098, g: 1, b: 0.5372549, a: 1}
+    panelOnItemSelectUI: {fileID: 1516536865}
   restartFadeOutImage: {fileID: 2110110254}
 --- !u!61 &895710253
 BoxCollider2D:
@@ -93086,7 +93112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4745098, g: 1, b: 0.5372549, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -93914,7 +93940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7411765, g: 1, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

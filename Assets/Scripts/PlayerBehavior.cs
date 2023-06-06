@@ -2,6 +2,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+[System.Serializable]
+public struct ItemInfo {
+    public GameObject prefab;
+    public Sprite sprite;
+    public Color color;
+    public Image panelOnItemSelectUI;
+}
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -16,7 +25,7 @@ public class PlayerBehavior : MonoBehaviour
     private InputActionMap fieldActionMap;
     private InputAction moveAction, jumpAction, selectItemAction, spawnItemAction, removeItemAction, restartLevelAction;
 
-    [SerializeField] private List<GameObject> itemList; // 플레이어가 변신할 수 있는 물체들
+    [SerializeField] private List<ItemInfo> itemInfoList; // 플레이어가 변신할 수 있는 물체들
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
     private ItemPreview itemPreview;
     Stack<GameObject> spawnedItemStack;
@@ -52,7 +61,7 @@ public class PlayerBehavior : MonoBehaviour
 
         spawnedItemStack = new Stack<GameObject>();
 
-        currentItemIndex = -1;
+        currentItemIndex = 0;
         isOnKinematicObject = false;
         restartButtonHoldedTime = 0f;
         isHoldingRestartButton = false;
@@ -60,7 +69,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
-        itemPreview.InitSpriteList(itemList);
+        itemPreview.InitSpriteList(itemInfoList);
     }
 
     void OnEnable()
@@ -144,18 +153,15 @@ public class PlayerBehavior : MonoBehaviour
 
     private void SelectItem(InputAction.CallbackContext context)
     {
-        currentItemIndex = (int)selectItemAction.ReadValue<float>() - 1;
-        if (currentItemIndex < 0)
-            itemPreview.HideItemPreview();
-        else
-            itemPreview.ShowItemPreview(currentItemIndex);
+        currentItemIndex = (int)selectItemAction.ReadValue<float>();
+        itemPreview.ShowItemPreview(currentItemIndex);
     }
 
     private void SpawnItemAndRespawn(InputAction.CallbackContext context) // 왼쪽 시프트 누르면 아이템 배치 후 재시작.
     {
-        if (currentItemIndex >= 0) // -1일 때 (선택된 아이템이 없을 때)는 취소됨.
+        if (itemInfoList[currentItemIndex].prefab) // 선택된 아이템이 없을 때는 취소됨.
         {
-            spawnedItemStack.Push(Instantiate(itemList[currentItemIndex], transform.position, transform.rotation));
+            spawnedItemStack.Push(Instantiate(itemInfoList[currentItemIndex].prefab, transform.position, transform.rotation));
             Respawn();
         }
     }
