@@ -390,5 +390,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   horizontalMove: 0
-  staticMapSensorOffset: {x: 0, y: 0.25, z: 0}
-  staticMapSensorSize: {x: 2, y: 0.5, z: 0}
+  sensorOffset: {x: 0, y: 0.25, z: 0}
+  sensorNonDirectionalOffset: {x: 0, y: 0, z: 0}
+  sensorSize: {x: 2, y: 0.2, z: 1}
