@@ -42,6 +42,12 @@ public class PlayerBehavior : MonoBehaviour
     private bool isHoldingRestartButton;
     private float restartButtonHoldedTime;
 
+    // 사운드 관리
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip spawnItem;
+    [SerializeField] private AudioClip removeItem;
+    private AudioSource audioSource;
+
     void Awake()
     {
         player_rigidbody = GetComponent<Rigidbody2D>();
@@ -64,6 +70,8 @@ public class PlayerBehavior : MonoBehaviour
         isOnKinematicObject = false;
         restartButtonHoldedTime = 0f;
         isHoldingRestartButton = false;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -117,7 +125,12 @@ public class PlayerBehavior : MonoBehaviour
     private void Jump(InputAction.CallbackContext context) // 플레이어 점프 시 호출
     {
         if (isGrounded)
+        {
             player_rigidbody.velocity = new Vector2(player_rigidbody.velocity.x, jumpForce);
+            audioSource.clip = jumpSound;
+            audioSource.Play();
+        }
+            
     }
 
     private void CheckIsGrounded() // 플레이어가 땅에 닿아 있는 지 확인.
@@ -162,6 +175,8 @@ public class PlayerBehavior : MonoBehaviour
         if (itemInfoList[currentItemIndex].prefab) // 선택된 아이템이 없을 때는 취소됨.
         {
             spawnedItemStack.Push(Instantiate(itemInfoList[currentItemIndex].prefab, transform.position, transform.rotation));
+            audioSource.clip = spawnItem;
+            audioSource.Play();
             Respawn();
         }
     }
@@ -183,6 +198,9 @@ public class PlayerBehavior : MonoBehaviour
         // ex) 플레이어가 움직이는 발판 위에 올라가면 해당 발판의 자식이 됨.
         if (transform.IsChildOf(lastSpawnedItem.transform))
             transform.SetParent(null);
+
+        audioSource.clip = removeItem;
+        audioSource.Play();
 
         Destroy(lastSpawnedItem);
     }
