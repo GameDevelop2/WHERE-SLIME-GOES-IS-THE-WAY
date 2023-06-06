@@ -2,14 +2,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 [System.Serializable]
 public struct ItemInfo {
     public GameObject prefab;
     public Sprite sprite;
     public Color color;
-    public Image panelOnItemSelectUI;
 }
 
 public class PlayerBehavior : MonoBehaviour
@@ -26,6 +24,7 @@ public class PlayerBehavior : MonoBehaviour
     private InputAction moveAction, jumpAction, selectItemAction, spawnItemAction, removeItemAction, restartLevelAction;
 
     [SerializeField] private List<ItemInfo> itemInfoList; // 플레이어가 변신할 수 있는 물체들
+    [SerializeField] private ItemSelectUI itemSelectUI; // 아이템 선택 UI를 제어하는 클래스
     private int currentItemIndex; // 위 리스트에서 현재 플레이어가 변신하고 있는 물체의 인덱스
     private ItemPreview itemPreview;
     Stack<GameObject> spawnedItemStack;
@@ -155,6 +154,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         currentItemIndex = (int)selectItemAction.ReadValue<float>();
         itemPreview.ShowItemPreview(currentItemIndex);
+        itemSelectUI?.HighlightSelectedItem(currentItemIndex);
     }
 
     private void SpawnItemAndRespawn(InputAction.CallbackContext context) // 왼쪽 시프트 누르면 아이템 배치 후 재시작.

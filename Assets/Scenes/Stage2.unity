@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 247778296}
   - component: {fileID: 247778298}
   - component: {fileID: 247778297}
+  - component: {fileID: 247778299}
   m_Layer: 5
   m_Name: ItemSelectPanel
   m_TagString: Untagged
@@ -362,6 +363,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247778295}
   m_CullTransparentMesh: 1
+--- !u!114 &247778299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247778295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d403bce923c2548b3500b567d32cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPanelImageList:
+  - {fileID: 1628102779}
+  - {fileID: 844515149}
+  - {fileID: 2106074308}
+  - {fileID: 807229269}
+  - {fileID: 880394743}
+  - {fileID: 419073685}
+  - {fileID: 1541062883}
+  - {fileID: 1516536865}
+  selectedColor: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
+  unselectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!1001 &249468723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7841,35 +7865,28 @@ MonoBehaviour:
   - prefab: {fileID: 0}
     sprite: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
-    panelOnItemSelectUI: {fileID: 1628102779}
   - prefab: {fileID: 7383424179334425106, guid: 95c9bf36757acbf4c8896cd4f79a8e88, type: 3}
     sprite: {fileID: 21300000, guid: 2cfe758c6fcd541409afd4743ae09c57, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
-    panelOnItemSelectUI: {fileID: 844515149}
   - prefab: {fileID: 5921187783522159812, guid: cc5a98fa07612df4d923ec725a63261f, type: 3}
     sprite: {fileID: 21300000, guid: 1c208fa3979d2734eaf7d961c95e9a3d, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
-    panelOnItemSelectUI: {fileID: 2106074308}
   - prefab: {fileID: 5862212778858640658, guid: cdc0095672d9f1243bca09622a7a17f8, type: 3}
     sprite: {fileID: 21300000, guid: 80a72575231862a4586b63337835c573, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
-    panelOnItemSelectUI: {fileID: 807229269}
   - prefab: {fileID: 7217021420429784993, guid: aacd8faaf0a7cd64d840850529d90991, type: 3}
     sprite: {fileID: 21300000, guid: 80a72575231862a4586b63337835c573, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
-    panelOnItemSelectUI: {fileID: 880394743}
   - prefab: {fileID: 8701281312284536813, guid: b8e10389255377545be2c1f9dd2be7cc, type: 3}
     sprite: {fileID: 21300000, guid: fc41f37193cdf95418314dbcab48c490, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
-    panelOnItemSelectUI: {fileID: 419073685}
   - prefab: {fileID: 820798380752102929, guid: 413ef513d1d8a3b4f848a185b36f10b3, type: 3}
     sprite: {fileID: 21300000, guid: 72b1b6b7bfcabc540a7d0f7f8647bfb7, type: 3}
     color: {r: 0.4745098, g: 1, b: 0.5372549, a: 1}
-    panelOnItemSelectUI: {fileID: 1541062883}
   - prefab: {fileID: 8290247961173689253, guid: d491db2e8bbb81b4abd1b3b58d4d61fe, type: 3}
     sprite: {fileID: 21300000, guid: c83cd8afb44e10743a1d24d9881f58ca, type: 3}
     color: {r: 0.4745098, g: 1, b: 0.5372549, a: 1}
-    panelOnItemSelectUI: {fileID: 1516536865}
+  itemSelectUI: {fileID: 247778299}
   restartFadeOutImage: {fileID: 2110110254}
 --- !u!61 &895710253
 BoxCollider2D:
