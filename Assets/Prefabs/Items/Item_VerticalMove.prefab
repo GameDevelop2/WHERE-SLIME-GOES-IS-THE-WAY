@@ -150,4 +150,4 @@ MonoBehaviour:
   horizontalMove: 0
   sensorOffset: {x: 0, y: 0.25, z: 0}
   sensorNonDirectionalOffset: {x: 0, y: 0.25, z: 0}
-  sensorSize: {x: 2, y: 0.2, z: 1}
+  sensorSize: {x: 1.98, y: 0.2, z: 1}
