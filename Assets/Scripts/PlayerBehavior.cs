@@ -210,7 +210,7 @@ public class PlayerBehavior : MonoBehaviour
         restartButtonHoldedTime = 0f;
         if (restartFadeOutImage)
             restartFadeOutImage.color = Color.clear;
-    }
+    } 
 
     private void FadeOutIfHoldingRestart()
     {
@@ -219,5 +219,5 @@ public class PlayerBehavior : MonoBehaviour
             restartButtonHoldedTime += Time.deltaTime;
             restartFadeOutImage.color = Color.Lerp(Color.clear, Color.black, restartButtonHoldedTime / 1.9f); // 인식까지의 시간 0.5초를 제외한 HoldTime은 2f, 완전히 암전한 화면을 보여주기 위해 0.1f 줄임
         }
-    }
+    } 
 }
