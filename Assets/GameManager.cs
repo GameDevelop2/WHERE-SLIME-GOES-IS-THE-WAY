@@ -6,8 +6,17 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private bool isGameClear;
+    private bool isTimeStopped;
     public TMP_Text timeText;
     private float playTime;
+    
+    private TMP_Text rankingText;
+    public GameObject RankingPanel;
+    public TMP_Text rankingTitle;
+
+    public GameObject itemScore;
+    
+
    
     private static GameManager instance;
     public static GameManager Instance
@@ -37,29 +46,43 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject); */
-    }
+    } 
 
-    public void GameClear()
-    {
-        isGameClear = true;
-        SceneManager.LoadScene("Ranking");
-    }
 
     private void Start()
     {
         isGameClear = false;
+        isTimeStopped = false;
+        RankingPanel.SetActive(false);
+        rankingText = RankingPanel.GetComponent<TMP_Text>();
 
         InitializePlayTime();
     }
 
     private void Update()
     {
-        if (!isGameClear)
+        if (!isGameClear && !isTimeStopped)
         {
             playTime += Time.deltaTime;
-            timeText.text = playTime.ToString("F1") + "sec";
+            timeText.text = playTime.ToString("F1") + " sec";
         }
     }
+    public void GameClear()
+    {
+        StopTime();
+        isGameClear = true;
+        ItemPlacementManager itemplacementmanager = GameObject.Find("ItemPlaceManager").GetComponent<ItemPlacementManager>();
+        RankingManager.Instance.DisplayTotalScore(playTime, itemplacementmanager.totalScore); 
+        RankingManager.Instance.UpdateRanking(playTime, itemplacementmanager.totalScore); 
+        RankingManager.Instance.DisplayRanking(); 
+        RankingPanel.SetActive(true);
+        GameObject gameClearUI = GameObject.FindWithTag("GameClearUI");
+        if (gameClearUI != null)
+        {
+            gameClearUI.SetActive(true);
+        }
+    }
+
 
     private void InitializePlayTime()
     {
@@ -71,6 +94,16 @@ public class GameManager : MonoBehaviour
     {
         return playTime;
     }
+    public void StopTime()
+    {
+        isTimeStopped = true;
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeTime()
+    {
+        isTimeStopped = false;
+        Time.timeScale = 1f;
+    }
 
 }
-

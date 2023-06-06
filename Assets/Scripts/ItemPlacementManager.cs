@@ -12,7 +12,7 @@ public class ItemPlacementManager : MonoBehaviour
 
     public TMP_Text scoreText; // 점수를 표시할 UI 텍스트(Text) 요소
 
-    private int totalScore; // 총 합산 점수
+    public int totalScore; // 총 합산 점수
 
     private void Start()
     {
