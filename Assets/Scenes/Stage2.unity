@@ -7538,11 +7538,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 580471683345202686, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 580471683345202686, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: sensorSize.x
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5862212778858640658, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: m_Name
@@ -7554,7 +7554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7328211092019061196, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.3
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: 7328211092019061196, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8169,11 +8169,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 580471683345202686, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 580471683345202686, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: sensorSize.x
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 580471683345202686, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: staticMapSensorOffset.x
@@ -8189,7 +8189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7328211092019061196, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.12
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7328211092019061196, guid: 5dcb44dd17096b546a6f8d66d8873005, type: 3}
       propertyPath: m_LocalPosition.y
