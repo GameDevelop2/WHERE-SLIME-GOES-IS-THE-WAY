@@ -6830,7 +6830,7 @@ GameObject:
   - component: {fileID: 1048341534}
   - component: {fileID: 1048341533}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Screenshot_Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
