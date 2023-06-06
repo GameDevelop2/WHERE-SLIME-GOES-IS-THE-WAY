@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,14 +12,14 @@ public class GameManager : MonoBehaviour
     private float playTime;
     
     private TMP_Text rankingText;
-    public GameObject RankingPanel;
+    public GameObject GameClearImage;
     public TMP_Text rankingTitle;
 
     public GameObject itemScore;
     
 
    
-    private static GameManager instance;
+    /*private static GameManager instance;
     public static GameManager Instance
     {
         get
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
             }
             return instance;
         }
-    }
+    } */
 
     private void Awake()
     {
@@ -53,8 +54,8 @@ public class GameManager : MonoBehaviour
     {
         isGameClear = false;
         isTimeStopped = false;
-        RankingPanel.SetActive(false);
-        rankingText = RankingPanel.GetComponent<TMP_Text>();
+        GameClearImage.SetActive(false);
+        rankingText = GameClearImage.GetComponent<TMP_Text>();
 
         InitializePlayTime();
     }
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameClear && !isTimeStopped)
         {
+            
             playTime += Time.deltaTime;
             timeText.text = playTime.ToString("F1") + " sec";
         }
@@ -75,12 +77,17 @@ public class GameManager : MonoBehaviour
         RankingManager.Instance.DisplayTotalScore(playTime, itemplacementmanager.totalScore); 
         RankingManager.Instance.UpdateRanking(playTime, itemplacementmanager.totalScore); 
         RankingManager.Instance.DisplayRanking(); 
-        RankingPanel.SetActive(true);
+        GameClearImage.SetActive(true);
         GameObject gameClearUI = GameObject.FindWithTag("GameClearUI");
         if (gameClearUI != null)
         {
             gameClearUI.SetActive(true);
         }
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("StageSelect");
+        }
+
     }
 
 

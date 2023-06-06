@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class StageSelectButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void GoToStageSelect()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SceneManager.LoadScene("StageSelect"); // "StageSelect"은 실제로 사용하는 씬 이름으로 대체해야 합니다.
     }
 }

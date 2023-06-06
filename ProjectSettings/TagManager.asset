@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - ground
   - obstacle
+  - GameClearUI
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,10 @@ public class EndPoint : MonoBehaviour
         if (coll.gameObject.CompareTag("Player"))
         {
             Destroy(this.gameObject);
-            GameManager.Instance.GameClear();
+            
+            //GameManager.Instance.GameClear();
+            GameManager gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gamemanager.GameClear();
             
         }
     }

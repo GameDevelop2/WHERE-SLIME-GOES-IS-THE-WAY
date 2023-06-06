@@ -8,7 +8,10 @@ public class RespawnObstacle : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) // 플레이어에 닿은 경우
+        {
+            Debug.Log("Player collided with the obstacle."); // 디버깅 메시지 출력
             collision.gameObject.GetComponent<PlayerBehavior>().Respawn();
+        }
 
         if (collision.CompareTag("Portal")) // 포탈에 닿은 경우엔 스스로를 삭제하지 않는다. (단, MapStaticObject 레이어로 설정 시엔 설정 상 포탈과 충돌 판정이 발생하지 않음)
             return;
