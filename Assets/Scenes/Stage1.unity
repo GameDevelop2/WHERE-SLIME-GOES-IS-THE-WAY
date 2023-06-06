@@ -10028,8 +10028,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rankingText: {fileID: 204425272}
-  rankingPanel: {fileID: 2017734995}
-  totalScoreText: {fileID: 1980296727}
+  rankingPanel: {fileID: 1711887667}
+  totalScoreText: {fileID: 2017734997}
 --- !u!4 &976321093
 Transform:
   m_ObjectHideFlags: 0
@@ -10959,6 +10959,9 @@ MonoBehaviour:
     color: {r: 0.4745098, g: 1, b: 0.5372549, a: 1}
   itemSelectUI: {fileID: 0}
   restartFadeOutImage: {fileID: 0}
+  jumpSound: {fileID: 0}
+  spawnItem: {fileID: 0}
+  removeItem: {fileID: 0}
 --- !u!61 &1135821973
 BoxCollider2D:
   m_ObjectHideFlags: 0

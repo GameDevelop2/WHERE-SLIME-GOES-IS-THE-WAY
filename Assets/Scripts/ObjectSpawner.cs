@@ -10,6 +10,8 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private Vector3 spawnPositionOffset;
     [Tooltip("오브젝트 스폰 후 스스로를 Destroy 할 지 여부")]
     [SerializeField] private bool destroySelfAfterObjectSpawn;
+    [Tooltip("오브젝트 스폰 여부 On/Off")]
+    [SerializeField] private bool stopSpawning;
 
     [Space(10f)]
     [Header("Repeat Setting")]
@@ -25,6 +27,9 @@ public class ObjectSpawner : MonoBehaviour
 
     void Update()
     {
+        if (stopSpawning)
+            return;
+
         currentSpawnCoolTime -= Time.deltaTime;
         if (currentSpawnCoolTime <= 0f)
         {
@@ -35,5 +40,16 @@ public class ObjectSpawner : MonoBehaviour
             else if (repeatSpawning)
                 currentSpawnCoolTime = spawnPeriod;            
         }
+    }
+
+    public void StopSpawning(float firstSpawndelay = 0f)
+    {
+        stopSpawning = true;
+    }
+
+    public void ResumeSpawning(float firstSpawndelay = 0f)
+    {
+        stopSpawning = false;
+        currentSpawnCoolTime = firstSpawndelay;
     }
 }
