@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StageSelect.unity
     guid: e0d59d50a57affb4faefcab322e732e8
   - enabled: 1
-    path: Assets/Scenes/oz_sample.unity
-    guid: be75d9950b728e74598dc2b3a322c474
+    path: Assets/Scenes/Stage1.unity
+    guid: d432b12168df4e54cb2ca2ab1f9b296e
   - enabled: 1
     path: Assets/Scenes/Stage2.unity
     guid: 4d800d32ee570e44c90925a65337feae
+  - enabled: 1
+    path: Assets/Scenes/Stage3.unity
+    guid: e6d7199d751d33341a6b1a5c9f8c9d60
   m_configObjects: {}
