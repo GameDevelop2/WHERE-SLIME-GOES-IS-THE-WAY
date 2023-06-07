@@ -1247,6 +1247,7 @@ MonoBehaviour:
   GameClearImage: {fileID: 665734765}
   rankingTitle: {fileID: 1759919954}
   itemScore: {fileID: 1577230603}
+  inputActions: {fileID: -944628639613478452, guid: 1b88e80fe3993534c89f0e6239e123ab, type: 3}
 --- !u!4 &302808730
 Transform:
   m_ObjectHideFlags: 0
@@ -15136,10 +15137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -25180,7 +25181,7 @@ MonoBehaviour:
   m_text: "\uC544\uB798\uC640 \uAC19\uC774 \uBD80\uC11C\uC9C4 \uC870\uC57D\uB3CC\uB85C
     \uC774\uB904\uC9C4 \uBB3C\uCCB4\uB294\n\uB099\uC11D\uC5D0 \uBD80\uB52A\uD788\uAC8C
     \uD558\uC5EC \uD30C\uAD34\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uD3EC\uD0C8\uC744
-    \uC0AC\uC6A9\uD574 \uB099\uC11D\uC744 \uB5A8\uAD88\uBD05\uC2DC\uB2E4."
+    \uC0AC\uC6A9\uD574 \uB099\uC11D\uC744 \uB5A8\uC5B4\uD2B8\uB824 \uBD05\uC2DC\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f29e9da88759bcf48a422e2aa56d4037, type: 2}
   m_sharedMaterial: {fileID: 4960052225008878553, guid: f29e9da88759bcf48a422e2aa56d4037, type: 2}

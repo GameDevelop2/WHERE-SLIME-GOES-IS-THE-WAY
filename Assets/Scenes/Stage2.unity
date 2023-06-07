@@ -94333,6 +94333,7 @@ MonoBehaviour:
   GameClearImage: {fileID: 528160968}
   rankingTitle: {fileID: 1107348866}
   itemScore: {fileID: 1385990002}
+  inputActions: {fileID: -944628639613478452, guid: 1b88e80fe3993534c89f0e6239e123ab, type: 3}
 --- !u!4 &1319752782
 Transform:
   m_ObjectHideFlags: 0

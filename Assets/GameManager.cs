@@ -10,12 +10,17 @@ public class GameManager : MonoBehaviour
     private bool isTimeStopped;
     public TMP_Text timeText;
     private float playTime;
-    
+
     private TMP_Text rankingText;
     public GameObject GameClearImage;
     public TMP_Text rankingTitle;
 
     public GameObject itemScore;
+
+    [SerializeField] InputActionAsset inputActions;
+    InputActionMap stageActionmap;
+    InputAction loadStageAction;
+
    
     /*private static GameManager instance;
     public static GameManager Instance
@@ -37,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        stageActionmap = inputActions.FindActionMap("Stage", true);
+        loadStageAction = stageActionmap.FindAction("LoadStage", true);
         ResumeTime();
         /*if (instance != null && instance != this)
         {
@@ -46,8 +53,18 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject); */
-    } 
+    }
 
+    private void OnEnable()
+    {
+        loadStageAction.performed += MoveToStageSelect;
+    }
+
+    private void OnDisable()
+    {
+        stageActionmap.Disable();
+        loadStageAction.performed -= MoveToStageSelect;
+    }
 
     private void Start()
     {
@@ -87,6 +104,8 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("StageSelect");
         }
 
+        stageActionmap.Enable();
+
     }
 
 
@@ -112,4 +131,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    void MoveToStageSelect(InputAction.CallbackContext context)
+    {
+        Debug.Log("MoveToStageSelect »£√‚");
+
+        if (isGameClear)
+        {
+            ResumeTime();
+            SceneManager.LoadScene(0);
+        }
+    }
 }
