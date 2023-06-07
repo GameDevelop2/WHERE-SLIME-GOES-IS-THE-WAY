@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
     public TMP_Text rankingTitle;
 
     public GameObject itemScore;
-    
-
    
     /*private static GameManager instance;
     public static GameManager Instance
@@ -39,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        ResumeTime();
         /*if (instance != null && instance != this)
         {
             Destroy(gameObject);
