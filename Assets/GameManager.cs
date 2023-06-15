@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     private TMP_Text rankingText;
     public GameObject GameClearImage;
-    public TMP_Text rankingTitle;
 
     public GameObject itemScore;
 
@@ -82,7 +81,7 @@ public class GameManager : MonoBehaviour
         {
             
             playTime += Time.deltaTime;
-            timeText.text = playTime.ToString("F1") + " sec";
+            timeText.text = playTime.ToString("F2") + " s";
         }
     }
     public void GameClear()
@@ -140,5 +139,10 @@ public class GameManager : MonoBehaviour
             ResumeTime();
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void OnClickRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

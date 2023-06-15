@@ -46,7 +46,7 @@ public class RankingManager : MonoBehaviour
         playerData.totalScore = timeScore + itemScore;
 
         rankingData.Add(playerData);
-        rankingData.Sort((a, b) => b.totalScore.CompareTo(a.totalScore)); // 내림차순으로 정렬 (높은 스코어가 상위 순위)
+        rankingData.Sort((a, b) => a.totalScore.CompareTo(b.totalScore)); // 오름차순으로 정렬 (낮은 스코어가 상위 순위)
 
         if (rankingData.Count > 5)
         {
@@ -59,9 +59,10 @@ public class RankingManager : MonoBehaviour
 
     public void DisplayTotalScore(float timeScore, int itemScore)
     {
-        string totalScoreText = "Time: " + timeScore.ToString("F2") + "\n"
-            + "Item: " + itemScore.ToString("F2") + "\n"
-            + "Total: " + (timeScore + itemScore).ToString("F2");
+        string totalScoreText = "   Time: " + timeScore.ToString("F2") + "\n"
+            + " + Item: " + itemScore.ToString("F2") + "\n"
+            + "--------------------" + "\n"
+            + "  Total: " + (timeScore + itemScore).ToString("F2");
 
         this.totalScoreText.text = totalScoreText;
     }
@@ -79,14 +80,14 @@ public class RankingManager : MonoBehaviour
     }
 
     
-   private void LoadRankingData()
-{
-    rankingData.Clear();
-    for (int i = 0; i < 5; i++)
+    private void LoadRankingData()
     {
-        string playerName = PlayerPrefs.GetString("RankingPlayerName_" + i);
-        float playTime = PlayerPrefs.GetFloat("RankingPlayTime_" + i);
-        float totalScore = PlayerPrefs.GetFloat("RankingTotalScore_" + i); // 토탈 스코어 불러오기
+        rankingData.Clear();
+        for (int i = 0; i < 5; i++)
+        {
+            string playerName = PlayerPrefs.GetString("RankingPlayerName_" + i);
+            float playTime = PlayerPrefs.GetFloat("RankingPlayTime_" + i);
+            float totalScore = PlayerPrefs.GetFloat("RankingTotalScore_" + i); // 토탈 스코어 불러오기
 
         
             PlayerData playerData = new PlayerData();
@@ -95,23 +96,18 @@ public class RankingManager : MonoBehaviour
             playerData.totalScore = totalScore; // 토탈 스코어 저장
             rankingData.Add(playerData);
         
+        }
     }
-}
 
-private void SaveRankingData()
-{
-    for (int i = 0; i < rankingData.Count; i++)
+    private void SaveRankingData()
     {
-        PlayerPrefs.SetString("RankingPlayerName_" + i, rankingData[i].playerName);
-        PlayerPrefs.SetFloat("RankingPlayTime_" + i, rankingData[i].playTime);
-        PlayerPrefs.SetFloat("RankingTotalScore_" + i, rankingData[i].totalScore); // 토탈 스코어 저장
+        for (int i = 0; i < rankingData.Count; i++)
+        {
+            PlayerPrefs.SetString("RankingPlayerName_" + i, rankingData[i].playerName);
+            PlayerPrefs.SetFloat("RankingPlayTime_" + i, rankingData[i].playTime);
+            PlayerPrefs.SetFloat("RankingTotalScore_" + i, rankingData[i].totalScore); // 토탈 스코어 저장
+        }
+
+        PlayerPrefs.Save();
     }
-
-    PlayerPrefs.Save();
 }
-}
-
-
-
-
-
