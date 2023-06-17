@@ -17,8 +17,4 @@ public class EndPoint : MonoBehaviour
             
         }
     }
-
-
-
-
 }

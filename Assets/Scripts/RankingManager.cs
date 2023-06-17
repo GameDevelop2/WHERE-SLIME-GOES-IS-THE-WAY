@@ -6,14 +6,7 @@ using TMPro;
 public class RankingManager : MonoBehaviour
 {
     public TMP_Text rankingText;
-    public GameObject rankingPanel;
     public TMP_Text totalScoreText;
-
-    private static RankingManager instance;
-    public static RankingManager Instance
-    {
-        get { return instance; }
-    }
 
     [System.Serializable]
     public class PlayerData
@@ -28,18 +21,12 @@ public class RankingManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
 
-        instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void UpdateRanking(float timeScore, int itemScore)
     {
+        LoadRankingData();
         PlayerData playerData = new PlayerData();
         playerData.playTime = timeScore;
         playerData.itemScore = itemScore;
@@ -52,7 +39,6 @@ public class RankingManager : MonoBehaviour
         {
             rankingData.RemoveAt(rankingData.Count - 1);
         }
-
         SaveRankingData();
         DisplayRanking();
     }
@@ -82,6 +68,7 @@ public class RankingManager : MonoBehaviour
     
     private void LoadRankingData()
     {
+        Debug.Log("LoadRankingData");
         rankingData.Clear();
         for (int i = 0; i < 5; i++)
         {
@@ -101,6 +88,7 @@ public class RankingManager : MonoBehaviour
 
     private void SaveRankingData()
     {
+        Debug.Log("SaveRankingData");
         for (int i = 0; i < rankingData.Count; i++)
         {
             PlayerPrefs.SetString("RankingPlayerName_" + i, rankingData[i].playerName);

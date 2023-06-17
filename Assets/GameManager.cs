@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public TMP_Text timeText;
     private float playTime;
 
-    private TMP_Text rankingText;
     public GameObject GameClearImage;
 
     public GameObject itemScore;
@@ -70,7 +69,6 @@ public class GameManager : MonoBehaviour
         isGameClear = false;
         isTimeStopped = false;
         GameClearImage.SetActive(false);
-        rankingText = GameClearImage.GetComponent<TMP_Text>();
 
         InitializePlayTime();
     }
@@ -89,24 +87,21 @@ public class GameManager : MonoBehaviour
         StopTime();
         isGameClear = true;
         ItemPlacementManager itemplacementmanager = GameObject.Find("ItemPlaceManager").GetComponent<ItemPlacementManager>();
-        RankingManager.Instance.DisplayTotalScore(playTime, itemplacementmanager.totalScore); 
-        RankingManager.Instance.UpdateRanking(playTime, itemplacementmanager.totalScore); 
-        RankingManager.Instance.DisplayRanking(); 
+        RankingManager rankingManager = GameObject.Find("RankingManager").GetComponent<RankingManager>();
+
+        rankingManager.DisplayTotalScore(playTime, itemplacementmanager.totalScore);
+        rankingManager.UpdateRanking(playTime, itemplacementmanager.totalScore);
+        rankingManager.DisplayRanking();
+
         GameClearImage.SetActive(true);
         GameObject gameClearUI = GameObject.FindWithTag("GameClearUI");
         if (gameClearUI != null)
         {
             gameClearUI.SetActive(true);
         }
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene("StageSelect");
-        }
 
         stageActionmap.Enable();
-
     }
-
 
     private void InitializePlayTime()
     {
@@ -130,7 +125,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    void MoveToStageSelect(InputAction.CallbackContext context)
+    public void MoveToStageSelect(InputAction.CallbackContext context)
     {
         Debug.Log("MoveToStageSelect »£√‚");
 

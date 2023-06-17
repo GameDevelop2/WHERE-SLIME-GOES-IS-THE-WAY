@@ -13280,7 +13280,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &920856619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13910,7 +13910,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rankingText: {fileID: 204425272}
-  rankingPanel: {fileID: 1711887667}
   totalScoreText: {fileID: 2017734997}
 --- !u!4 &976321093
 Transform:
@@ -17919,8 +17918,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeText: {fileID: 1021432202}
   GameClearImage: {fileID: 851908340}
-  rankingTitle: {fileID: 1438133836}
   itemScore: {fileID: 1980296726}
+  RankingManager: {fileID: 976321091}
   inputActions: {fileID: -944628639613478452, guid: 1b88e80fe3993534c89f0e6239e123ab, type: 3}
 --- !u!4 &2085538365
 Transform:
